@@ -1,6 +1,6 @@
 from . import _
 
-from os import path, listdir
+from os import chmod, listdir, path
 from enigma import eTimer
 
 from Components.ActionMap import ActionMap
@@ -108,7 +108,8 @@ class AltCamManager(Screen):
 			if self.softcamlist:
 				self.softcamlist.sort()
 				self.iscam = True
-				self.Console.ePopen("chmod 755 %s/*" % config.plugins.AltSoftcam.camdir.value)
+				for x in self.softcamlist:
+					chmod(path.join(config.plugins.AltSoftcam.camdir.value, x) , 0755)
 				if self.actcam != "none" and getcamscript(self.actcam):
 					self.createcamlist()
 				else:
