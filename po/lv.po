@@ -1,0 +1,70 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-01-11 19:10+0200\n"
+"Last-Translator: Tapat <taapat@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+
+msgid "Alternative SoftCam Manager"
+msgstr "Alternatīvais SoftCam pārvaldnieks"
+
+msgid "Directory %s does not exist!\n"
+"Please set the correct directory path!"
+msgstr "Mape %s neeksistē!\n"
+"Lūdzu norādiet pareizu ceļu uz mapi!"
+
+msgid "Exit"
+msgstr "Iziet"
+
+msgid "Really close without saving settings?"
+msgstr "Vai tiešām aizvērt, nesaglabājot iestatījumus?"
+
+msgid "Restart"
+msgstr "Pārstatrtēt"
+
+msgid "Restart softcam"
+msgstr "Pārstatrtēt softcam"
+
+msgid "Restarting %s"
+msgstr "Pārstartē %s"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Setup"
+msgstr "Iestatījumi"
+
+msgid "Show 'Restart softcam' in extensions menu"
+msgstr "Rādīt 'Pārstatrtēt softcam' paplašinājumu izvēlnē"
+
+msgid "SoftCam config directory"
+msgstr "SoftCam konfigurācijas failu mape"
+
+msgid "SoftCam directory"
+msgstr "SoftCam mape"
+
+msgid "SoftCam manager"
+msgstr "SoftCam pārvaldnieks"
+
+msgid "SoftCam path configuration"
+msgstr "SoftCam ceļu iestatīšana"
+
+msgid "Start"
+msgstr "Startēt"
+
+msgid "Starting %s"
+msgstr "Startējas %s"
+
+msgid "Start, stop, restart SoftCams, change settings."
+msgstr "Startē, aptur, pārstartē SoftCam, maina iestatījumus."
+
+msgid "Stop"
+msgstr "Apturēt"
+
+msgid "Stopping %s"
+msgstr "Aptur %s"

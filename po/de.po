@@ -1,0 +1,88 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+
+#: src/plugin.py:39
+msgid "Alternative SoftCam Manager"
+msgstr "Alternative SoftCam Manager"
+
+#: src/Manager.py:318
+#, python-format
+msgid ""
+"Directory %s does not exist!\n"
+"Please set the correct directory path!"
+msgstr ""
+"Verzeichnis %s existiert nicht!\n"
+"Bitte stellen Sie die richtige Verzeichnispfad!"
+
+#: src/Manager.py:288
+msgid "Exit"
+msgstr "Verlassen"
+
+#: src/Manager.py:334
+msgid "Really close without saving settings?"
+msgstr "Wirklich ohne zu Speichern  der Einstellungen schließen?"
+
+#: src/Manager.py:63
+msgid "Restart"
+msgstr "Restart"
+
+#: src/Manager.py:233
+#, python-format
+msgid "Restarting %s"
+msgstr " %s Wird neu gestartet"
+
+#: src/Manager.py:289
+msgid "Ok"
+msgstr "Ok"
+
+#: src/Manager.py:64
+msgid "Setup"
+msgstr "Einstellungen"
+
+#: src/Manager.py:323
+msgid "SoftCam config directory"
+msgstr "Einstellung der SoftCam  verzeichnis"
+
+#: src/Manager.py:325
+msgid "SoftCam directory"
+msgstr "SoftCam Verzeichnis"
+
+#: src/Manager.py:59
+msgid "SoftCam manager"
+msgstr "SoftCam Manager"
+
+#: src/Manager.py:287
+msgid "SoftCam path configuration"
+msgstr "SoftCam Pfadkonfiguration"
+
+#: src/Manager.py:62
+msgid "Start"
+msgstr "Start"
+
+#: src/Manager.py:206
+#, python-format
+msgid "Starting %s"
+msgstr " %s Wird gestarted"
+
+#: src/plugin.py:40
+msgid "Start, stop, restart SoftCams, change settings."
+msgstr "Start, stop, restart SoftCams, einstellungen ändern."
+
+#: src/Manager.py:61
+msgid "Stop"
+msgstr "Stop"
+
+#: src/Manager.py:215
+#, python-format
+msgid "Stopping %s"
+msgstr "%s Wird angehalten"
+
