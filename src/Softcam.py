@@ -1,4 +1,4 @@
-from os import listdir, mkdir, path, remove
+import os
 
 from Components.config import config
 from Components.Console import Console
@@ -31,15 +31,15 @@ def getcamcmd(cam):
 		return config.plugins.AltSoftcam.camdir.value + "/" + cam + " -b -c " + \
 			config.plugins.AltSoftcam.camconfig.value + "/"
 	elif "rucam" in camname:
-		if not path.exists("/proc/sparkid"):
-			if path.exists("/lib/modules/encrypt.ko"):
+		if not os.path.exists("/proc/sparkid"):
+			if os.path.exists("/lib/modules/encrypt.ko"):
 				Console().ePopen("insmod /lib/modules/encrypt.ko")
 			else:
-				for version in listdir("/lib/modules"):
-					if path.exists("/lib/modules/%s/extra/encrypt/encrypt.ko" % version):
+				for version in os.listdir("/lib/modules"):
+					if os.path.exists("/lib/modules/%s/extra/encrypt/encrypt.ko" % version):
 						Console().ePopen("modprobe encrypt")
 			sparkid = config.plugins.AltSoftcam.camconfig.value + "/sparkid"
-			if path.exists(sparkid):
+			if os.path.exists(sparkid):
 				cmd = "cat " + sparkid + " > /proc/sparkid"
 				from time import sleep
 				sleep(2)
@@ -63,7 +63,7 @@ def stopcam(cam):
 	print "[Alternative SoftCam Manager] stopping", cam
 	Console().ePopen(cmd)
 	try:
-		remove("/tmp/ecm.info")
+		os.remove("/tmp/ecm.info")
 	except:
 		pass
 
@@ -72,20 +72,20 @@ def __createdir(list):
 	dir = ""
 	for line in list[1:].split("/"):
 		dir += "/" + line
-		if not path.exists(dir):
+		if not os.path.exists(dir):
 			try:
-				mkdir(dir)
+				os.mkdir(dir)
 			except:
 				print "[Alternative SoftCam Manager] Failed to mkdir", dir
 
 
 def checkconfigdir():
-	if not path.exists(config.plugins.AltSoftcam.camconfig.value):
+	if not os.path.exists(config.plugins.AltSoftcam.camconfig.value):
 		__createdir("/var/keys")
 		config.plugins.AltSoftcam.camconfig.value = "/var/keys"
 		config.plugins.AltSoftcam.camconfig.save()
-	if not path.exists(config.plugins.AltSoftcam.camdir.value):
-		if path.exists("/var/emu") and listdir("/var/emu"):
+	if not os.path.exists(config.plugins.AltSoftcam.camdir.value):
+		if os.path.exists("/var/emu") and os.listdir("/var/emu"):
 			config.plugins.AltSoftcam.camdir.value = "/var/emu"
 		else:
 			__createdir("/usr/bin/cam")

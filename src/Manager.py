@@ -1,8 +1,6 @@
-from . import _
+import os
 
-from os import chmod, listdir, path
 from enigma import eTimer
-
 from Components.ActionMap import ActionMap
 from Components.config import config, getConfigListEntry
 from Components.Console import Console
@@ -15,6 +13,7 @@ from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 
+from . import _
 from Softcam import checkconfigdir, getcamcmd, getcamscript, stopcam
 
 
@@ -103,13 +102,13 @@ class AltCamManager(Screen):
 		self.listecminfo()
 
 	def camliststart(self):
-		if path.exists(config.plugins.AltSoftcam.camdir.value):
-			self.softcamlist = listdir(config.plugins.AltSoftcam.camdir.value)
+		if os.path.exists(config.plugins.AltSoftcam.camdir.value):
+			self.softcamlist = os.listdir(config.plugins.AltSoftcam.camdir.value)
 			if self.softcamlist:
 				self.softcamlist.sort()
 				self.iscam = True
 				for x in self.softcamlist:
-					chmod(path.join(config.plugins.AltSoftcam.camdir.value, x) , 0755)
+					os.chmod(os.path.join(config.plugins.AltSoftcam.camdir.value, x) , 0755)
 				if self.actcam != "none" and getcamscript(self.actcam):
 					self.createcamlist()
 				else:
@@ -294,9 +293,9 @@ class ConfigEdit(Screen, ConfigListScreen):
 
 	def ok(self):
 		msg = [ ]
-		if not path.exists(config.plugins.AltSoftcam.camconfig.value):
+		if not os.path.exists(config.plugins.AltSoftcam.camconfig.value):
 			msg.append("%s " % config.plugins.AltSoftcam.camconfig.value)
-		if not path.exists(config.plugins.AltSoftcam.camdir.value):
+		if not os.path.exists(config.plugins.AltSoftcam.camdir.value):
 			msg.append("%s " % config.plugins.AltSoftcam.camdir.value)
 		if msg == [ ]:
 			if config.plugins.AltSoftcam.camconfig.value[-1] == "/":
