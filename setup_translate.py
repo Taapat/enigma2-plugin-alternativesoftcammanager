@@ -24,7 +24,7 @@ class build_trans(cmd.Command):
 					src = os.path.join(s, lang)
 					lang = lang[:-3]
 					destdir = os.path.join('build', 'lib', 'Extensions',
-						'TV3Play', 'locale', lang, 'LC_MESSAGES')
+						'AlternativeSoftCamManager', 'locale', lang, 'LC_MESSAGES')
 					if not os.path.exists(destdir):
 						os.makedirs(destdir)
 					for lang_domain in lang_domains:
