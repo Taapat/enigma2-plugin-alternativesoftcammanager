@@ -41,10 +41,14 @@ class AltCamManager(Screen):
 				text="Ecm info" transparent="1" />
 			<widget name="status" position="360,50" size="320,300" font="Regular;16" \
 				halign="left" />
-			<eLabel position="12,358" size="148,2" backgroundColor="#00ff2525" />
-			<eLabel position="165,358" size="148,2" backgroundColor="#00389416" />
-			<eLabel position="318,358" size="148,2" backgroundColor="#00baa329" />
-			<eLabel position="471,358" size="148,2" backgroundColor="#006565ff" />
+			<ePixmap position="16,321" size="140,40" pixmap="skin_default/buttons/red.png" \
+				transparent="1" alphatest="on" />
+			<ePixmap position="169,321" size="140,40" pixmap="skin_default/buttons/green.png" \
+				transparent="1" alphatest="on" />
+			<ePixmap position="322,321" size="140,40" pixmap="skin_default/buttons/yellow.png" \
+				transparent="1" alphatest="on" />
+			<ePixmap position="475,321" size="140,40" pixmap="skin_default/buttons/blue.png" \
+				transparent="1" alphatest="on" />
 			<widget source="key_red" render="Label" position="12,328" zPosition="2" size="148,30" \
 				valign="center" halign="center" font="Regular;22" transparent="1" />
 			<widget source="key_green" render="Label" position="165,328" zPosition="2" size="148,30" \
@@ -260,13 +264,15 @@ class ConfigEdit(Screen, ConfigListScreen):
 		<screen name="ConfigEdit" position="center,center" size="500,200" \
 			title="SoftCam path configuration">
 			<eLabel position="5,0" size="490,2" backgroundColor="#aaaaaa" />
-			<widget name="config" position="30,20" size="460,50" zPosition="1" \
+			<widget name="config" position="20,20" size="460,75" zPosition="1" \
 				scrollbarMode="showOnDemand" />
-			<eLabel position="85,180" size="166,2" backgroundColor="#00ff2525" />
-			<eLabel position="255,180" size="166,2" backgroundColor="#00389416" />
-			<widget source="key_red" render="Label" position="85,150" zPosition="2" size="170,30" \
+			<ePixmap position="100,143" size="140,40" pixmap="skin_default/buttons/red.png" \
+				transparent="1" alphatest="on" />
+			<ePixmap position="270,143" size="140,40" pixmap="skin_default/buttons/green.png" \
+				transparent="1" alphatest="on" />
+			<widget source="key_red" render="Label" position="100,150" zPosition="2" size="140,30" \
 				valign="center" halign="center" font="Regular;22" transparent="1" />
-			<widget source="key_green" render="Label" position="255,150" zPosition="2" size="170,30" \
+			<widget source="key_green" render="Label" position="270,150" zPosition="2" size="140,30" \
 				valign="center" halign="center" font="Regular;22" transparent="1" />
 			<widget name="HelpWindow" position="400,480" size="1,1" zPosition="5" \
 					pixmap="skin_default/vkey_icon.png" transparent="1" alphatest="on" />
