@@ -5,6 +5,7 @@ from Components.ActionMap import ActionMap
 from Components.config import config, getConfigListEntry
 from Components.Console import Console
 from Components.ConfigList import ConfigListScreen
+from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
@@ -267,6 +268,8 @@ class ConfigEdit(Screen, ConfigListScreen):
 				valign="center" halign="center" font="Regular;22" transparent="1" />
 			<widget source="key_green" render="Label" position="255,150" zPosition="2" size="170,30" \
 				valign="center" halign="center" font="Regular;22" transparent="1" />
+			<widget name="HelpWindow" position="400,480" size="1,1" zPosition="5" \
+					pixmap="skin_default/vkey_icon.png" transparent="1" alphatest="on" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -274,6 +277,7 @@ class ConfigEdit(Screen, ConfigListScreen):
 		self.setTitle(_("SoftCam path configuration"))
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = StaticText(_("Ok"))
+		self["HelpWindow"] = Pixmap()
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 			{
 				"cancel": self.cancel,
