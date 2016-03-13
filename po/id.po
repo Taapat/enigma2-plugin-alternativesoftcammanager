@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Budiarno\n"
+"Language-Team: \n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+
+msgid "Alternative SoftCam Manager"
+msgstr "Alternative SoftCam Manager"
+
+msgid ""
+"Directory %s does not exist!\n"
+"Please set the correct directory path!"
+msgstr ""
+"Direktori %s tidak ada!\n"
+"Silakan atur letak direktori yg benar!"
+
+msgid "Exit"
+msgstr "Keluar"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Really close without saving settings?"
+msgstr "Yakin keluar tanpa menyimpan pengaturan?"
+
+msgid "Restart"
+msgstr "Mulai lagi"
+
+msgid "Restarting %s"
+msgstr " %s sedang mulai lagi"
+
+msgid "Setup"
+msgstr "Atur"
+
+msgid "SoftCam config directory"
+msgstr "Direktori konfig SoftCam"
+
+msgid "SoftCam directory"
+msgstr "Direktori SoftCam"
+
+msgid "SoftCam manager"
+msgstr "Pengelola SoftCam"
+
+msgid "SoftCam path configuration"
+msgstr "Konfigurasi letak SoftCam"
+
+msgid "Start"
+msgstr "Mulai"
+
+msgid "Start, stop, restart SoftCams, change settings."
+msgstr "Mulai, berhenti, mulai lagi SoftCam, ubah pengaturan."
+
+msgid "Starting %s"
+msgstr " %s sedang memulai"
+
+msgid "Stop"
+msgstr "Berhenti"
+
+msgid "Stopping %s"
+msgstr "%s sedang berhenti"
+
+msgid "Show 'Restart softcam' in extensions menu"
+msgstr "Tampilkan 'Mulai lagi SoftCam' di menu ekstensi"
+
+msgid "Restart softcam"
+msgstr "Mulai lagi SoftCam"
