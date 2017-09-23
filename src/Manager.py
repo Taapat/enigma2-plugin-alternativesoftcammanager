@@ -189,16 +189,18 @@ class AltCamManager(Screen):
 			if self.camstart != self.actcam:
 				print "[Alternative SoftCam Manager] Start SoftCam"
 				self.camstartcmd = getcamcmd(self.camstart)
-				msg = _("Starting %s") % self.camstart
-				self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, timeout = 3)
+				self.session.open(MessageBox,
+					_("Starting %s") % self.camstart,
+					MessageBox.TYPE_INFO, timeout = 3)
 				self.stoppingTimer.start(100, False)
 
 	def stop(self):
 		if self.iscam and self.actcam != "none" and self.finish:
 			stopcam(self.actcam)
-			msg  = _("Stopping %s") % self.actcam
+			self.session.open(MessageBox,
+				_("Stopping %s") % self.actcam,
+				MessageBox.TYPE_INFO, timeout = 3)
 			self.actcam = "none"
-			self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, timeout = 3)
 			self.closestopTimer.start(1000, False)
 
 	def closestop(self):
@@ -211,8 +213,9 @@ class AltCamManager(Screen):
 			self.camstart = self.actcam
 			if self.camstartcmd == "":
 				self.camstartcmd = getcamcmd(self.camstart)
-			msg = _("Restarting %s") % self.actcam
-			self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, timeout = 3)
+			self.session.open(MessageBox,
+				_("Restarting %s") % self.actcam,
+				MessageBox.TYPE_INFO, timeout = 3)
 			self.stoppingTimer.start(100, False)
 
 	def stopping(self):
