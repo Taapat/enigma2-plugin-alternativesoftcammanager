@@ -190,7 +190,7 @@ class AltCamManager(Screen):
 				print "[Alternative SoftCam Manager] Start SoftCam"
 				self.camstartcmd = getcamcmd(self.camstart)
 				msg = _("Starting %s") % self.camstart
-				self.mbox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, timeout = 3)
 				self.stoppingTimer.start(100, False)
 
 	def stop(self):
@@ -198,12 +198,11 @@ class AltCamManager(Screen):
 			stopcam(self.actcam)
 			msg  = _("Stopping %s") % self.actcam
 			self.actcam = "none"
-			self.mbox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, timeout = 3)
 			self.closestopTimer.start(1000, False)
 
 	def closestop(self):
 		self.closestopTimer.stop()
-		self.mbox.close()
 		self.createinfo()
 
 	def restart(self):
@@ -213,7 +212,7 @@ class AltCamManager(Screen):
 			if self.camstartcmd == "":
 				self.camstartcmd = getcamcmd(self.camstart)
 			msg = _("Restarting %s") % self.actcam
-			self.mbox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, timeout = 3)
 			self.stoppingTimer.start(100, False)
 
 	def stopping(self):
@@ -225,8 +224,6 @@ class AltCamManager(Screen):
 			self.session.nav.stopService()
 		self.Console.ePopen(self.camstartcmd)
 		print "[Alternative SoftCam Manager] ", self.camstartcmd
-		if self.mbox:
-			self.mbox.close()
 		if service:
 			self.session.nav.playService(service)
 		self.createinfo()
@@ -317,7 +314,7 @@ class ConfigEdit(Screen, ConfigListScreen):
 			config.plugins.AltSoftcam.save()
 			self.close()
 		else:
-			self.mbox = self.session.open(MessageBox,
+			self.session.open(MessageBox,
 				_("Directory %s does not exist!\nPlease set the correct directory path!")
 				% msg, MessageBox.TYPE_INFO, timeout = 5)
 
