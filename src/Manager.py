@@ -285,12 +285,12 @@ class ConfigEdit(Screen, ConfigListScreen):
 		self["config"].setList(configlist)
 
 	def ok(self):
-		msg = [ ]
+		msg = []
 		if not os.path.exists(config.plugins.AltSoftcam.camconfig.value):
 			msg.append("%s " % config.plugins.AltSoftcam.camconfig.value)
 		if not os.path.exists(config.plugins.AltSoftcam.camdir.value):
 			msg.append("%s " % config.plugins.AltSoftcam.camdir.value)
-		if msg == [ ]:
+		if not msg:
 			if config.plugins.AltSoftcam.camconfig.value[-1] == "/":
 				config.plugins.AltSoftcam.camconfig.value = \
 					config.plugins.AltSoftcam.camconfig.value[:-1]
