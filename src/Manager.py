@@ -153,35 +153,18 @@ class AltCamManager(Screen):
 		self.finish = True
 
 	def checkcam(self, cam):
-		cam = cam.lower()
+		cam = cam.title()
 		if getcamscript(cam):
 			return "Script"
-		elif "oscam" in cam:
-			return "Oscam"
-		elif "mgcamd" in cam:
-			return "Mgcamd"
-		elif "wicard" in cam:
-			return "Wicard"
-		elif "camd3" in cam:
-			return "Camd3"
-		elif "mcas" in cam:
-			return "Mcas"
-		elif "cccam" in cam:
+		if cam[:5] in ("Oscam", "Camd3", "Newcs", "Rucam"):
+			return cam[:5]
+		elif cam[:4] in ("Mcas", "Gbox", "Mpcs", "Mbox"):
+			return cam[:4]
+		cam = cam[:6]
+		if "Cccam" in cam:
 			return "CCcam"
-		elif "gbox" in cam:
-			return "Gbox"
-		elif "mpcs" in cam:
-			return "Mpcs"
-		elif "mbox" in cam:
-			return "Mbox"
-		elif "newcs" in cam:
-			return "Newcs"
-		elif "vizcam" in cam:
-			return "Vizcam"
-		elif "rucam" in cam:
-			return "Rucam"
 		else:
-			return cam[:6]
+			return cam
 
 	def start(self):
 		if self.iscam and self.finish:
