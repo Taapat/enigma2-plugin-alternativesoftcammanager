@@ -1,7 +1,7 @@
 import os
 
 from Components.config import config
-from Components.Console import Console
+from enigma import eConsoleAppContainer
 
 
 def getcamcmd(cam):
@@ -33,17 +33,17 @@ def getcamcmd(cam):
 	elif "rucam" in camname:
 		if not os.path.exists("/proc/sparkid"):
 			if os.path.exists("/lib/modules/encrypt.ko"):
-				Console().ePopen("insmod /lib/modules/encrypt.ko")
+				eConsoleAppContainer().execute("insmod /lib/modules/encrypt.ko")
 			else:
 				for version in os.listdir("/lib/modules"):
 					if os.path.exists("/lib/modules/%s/extra/encrypt/encrypt.ko" % version):
-						Console().ePopen("modprobe encrypt")
+						eConsoleAppContainer().execute("modprobe encrypt")
 			sparkid = config.plugins.AltSoftcam.camconfig.value + "/sparkid"
 			if os.path.exists(sparkid):
 				cmd = "cat " + sparkid + " > /proc/sparkid"
 				from time import sleep
 				sleep(2)
-				Console().ePopen(cmd)
+				eConsoleAppContainer().execute(cmd)
 		return config.plugins.AltSoftcam.camdir.value + "/" + cam + " -b"
 	return config.plugins.AltSoftcam.camdir.value + "/" + cam
 
@@ -61,7 +61,7 @@ def stopcam(cam):
 	else:
 		cmd = "killall -15 " + cam
 	print "[Alternative SoftCam Manager] stopping", cam
-	Console().ePopen(cmd)
+	eConsoleAppContainer().execute(cmd)
 	try:
 		os.remove("/tmp/ecm.info")
 	except:
