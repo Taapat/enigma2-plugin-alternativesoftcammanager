@@ -1,6 +1,6 @@
 import os
 
-from enigma import eConsoleAppContainer, eTimer
+from enigma import eTimer
 from Components.ActionMap import ActionMap
 from Components.config import config, getConfigListEntry
 from Components.Console import Console
@@ -62,6 +62,7 @@ class AltCamManager(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.setTitle(_("SoftCam manager"))
+		self.Console = Console()
 		self["key_red"] = StaticText(_("Stop"))
 		self["key_green"] = StaticText(_("Start"))
 		self["key_yellow"] = StaticText(_("Restart"))
@@ -116,7 +117,7 @@ class AltCamManager(Screen):
 				if self.actcam != "none" and getcamscript(self.actcam):
 					self.createcamlist()
 				else:
-					Console().ePopen("pidof %s" % self.actcam, self.camactive)
+					self.Console.ePopen("pidof %s" % self.actcam, self.camactive)
 			else:
 				self.finish = True
 				self["list"].setList([])
@@ -129,9 +130,10 @@ class AltCamManager(Screen):
 			self.createcamlist()
 		else:
 			self.actcam = "none"
+			self.checkConsole = Console()
 			for line in self.softcamlist:
-				Console().ePopen("pidof %s" % line, self.camactivefromlist, line)
-			Console().ePopen("echo 1", self.camactivefromlist, "none")
+				self.checkConsole.ePopen("pidof %s" % line, self.camactivefromlist, line)
+			self.checkConsole.ePopen("echo 1", self.camactivefromlist, "none")
 
 	def camactivefromlist(self, result, retval, extra_args):
 		if result.strip():
@@ -206,7 +208,7 @@ class AltCamManager(Screen):
 		service = self.session.nav.getCurrentlyPlayingServiceReference()
 		if service:
 			self.session.nav.stopService()
-		eConsoleAppContainer().execute(self.camstartcmd)
+		self.Console.ePopen(self.camstartcmd)
 		print "[Alternative SoftCam Manager] ", self.camstartcmd
 		if service:
 			self.session.nav.playService(service)
@@ -302,7 +304,7 @@ class ConfigEdit(Screen, ConfigListScreen):
 				_("Directory %s does not exist!\nPlease set the correct directory path!")
 				% msg, MessageBox.TYPE_INFO, timeout = 5)
 
-	def cancel(self, answer=None):
+	def cancel(self, answer = None):
 		if answer is None:
 			if self["config"].isChanged():
 				self.session.openWithCallback(self.cancel, MessageBox,

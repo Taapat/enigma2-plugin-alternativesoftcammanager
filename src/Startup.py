@@ -1,4 +1,4 @@
-from enigma import eConsoleAppContainer, eTimer
+from enigma import eTimer
 from Components.config import config
 from Components.Console import Console
 from Screens.MessageBox import MessageBox
@@ -21,13 +21,14 @@ class RestartCam:
 				self.session.nav.stopService()
 			cmd = getcamcmd(cam)
 			print "[Alternative SoftCam Manager]", cmd
-			eConsoleAppContainer().execute(cmd)
+			Console().ePopen(cmd)
 			if service:
 				self.session.nav.playService(service)
 
 
 class StartCamOnStart:
 	def __init__(self):
+		self.Console = Console()
 		self.Timer = eTimer()
 		self.Timer.timeout.get().append(self.__camnotrun)
 
@@ -36,7 +37,7 @@ class StartCamOnStart:
 
 	def __camnotrun(self):
 		self.Timer.stop()
-		Console().ePopen("ps", self.checkprocess)
+		self.Console.ePopen("ps", self.checkprocess)
 
 	def checkprocess(self, result, retval, extra_args):
 		processes = result.lower()
@@ -50,7 +51,7 @@ class StartCamOnStart:
 		else:
 			cmd = getcamcmd(config.plugins.AltSoftcam.actcam.value)
 			print "[Alternative SoftCam Manager]", cmd
-			eConsoleAppContainer().execute(cmd)
+			Console().ePopen(cmd)
 
 startcamonstart = StartCamOnStart()
 
