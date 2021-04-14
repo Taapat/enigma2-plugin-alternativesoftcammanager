@@ -6,6 +6,7 @@ from Screens.MessageBox import MessageBox
 from . import _
 from Softcam import getcamcmd, stopcam
 
+
 class RestartCam:
 	def __init__(self, session):
 		self.session = session
@@ -52,6 +53,7 @@ class StartCamOnStart:
 			cmd = getcamcmd(config.plugins.AltSoftcam.actcam.value)
 			print "[Alternative SoftCam Manager]", cmd
 			Console().ePopen(cmd)
+
 
 startcamonstart = StartCamOnStart()
 

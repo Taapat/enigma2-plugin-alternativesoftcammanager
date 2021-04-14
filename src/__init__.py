@@ -17,6 +17,7 @@ def _(txt):
 		t = gettext(txt)
 	return t
 
+
 localeInit()
 language.addCallback(localeInit)
 
