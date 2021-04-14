@@ -174,7 +174,7 @@ class AltCamManager(Screen):
 				self.camstartcmd = getcamcmd(self.camstart)
 				self.session.open(MessageBox,
 					_("Starting %s") % self.camstart,
-					MessageBox.TYPE_INFO, timeout = 3)
+					MessageBox.TYPE_INFO, timeout=3)
 				self.stoppingTimer.start(100, False)
 
 	def stop(self):
@@ -182,7 +182,7 @@ class AltCamManager(Screen):
 			stopcam(self.actcam)
 			self.session.open(MessageBox,
 				_("Stopping %s") % self.actcam,
-				MessageBox.TYPE_INFO, timeout = 3)
+				MessageBox.TYPE_INFO, timeout=3)
 			self.actcam = "none"
 			self.closestopTimer.start(1000, False)
 
@@ -198,7 +198,7 @@ class AltCamManager(Screen):
 				self.camstartcmd = getcamcmd(self.camstart)
 			self.session.open(MessageBox,
 				_("Restarting %s") % self.actcam,
-				MessageBox.TYPE_INFO, timeout = 3)
+				MessageBox.TYPE_INFO, timeout=3)
 			self.stoppingTimer.start(100, False)
 
 	def stopping(self):
@@ -302,9 +302,9 @@ class ConfigEdit(Screen, ConfigListScreen):
 		else:
 			self.session.open(MessageBox,
 				_("Directory %s does not exist!\nPlease set the correct directory path!")
-				% msg, MessageBox.TYPE_INFO, timeout = 5)
+				% msg, MessageBox.TYPE_INFO, timeout=5)
 
-	def cancel(self, answer = None):
+	def cancel(self, answer=None):
 		if answer is None:
 			if self["config"].isChanged():
 				self.session.openWithCallback(self.cancel, MessageBox,

@@ -14,7 +14,7 @@ class RestartCam:
 		cam = config.plugins.AltSoftcam.actcam.value
 		if cam != "none":
 			self.session.open(MessageBox, _("Restarting %s") % cam, 
-				type = MessageBox.TYPE_INFO, timeout = 4)
+				type=MessageBox.TYPE_INFO, timeout=4)
 			stopcam(cam)
 			service = self.session.nav.getCurrentlyPlayingServiceReference()
 			if service:
