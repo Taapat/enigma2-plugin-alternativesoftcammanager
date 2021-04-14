@@ -20,11 +20,14 @@ def main(session, **kwargs):
 	from Manager import AltCamManager
 	session.open(AltCamManager)
 
+
 def restartcam(session, **kwargs):
 	from Startup import RestartCam
 	RestartCam(session).restart()
 
+
 EnigmaStart = False
+
 
 def startcam(reason, **kwargs):
 	if config.plugins.AltSoftcam.actcam.value != "none":
