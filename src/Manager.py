@@ -113,7 +113,7 @@ class AltCamManager(Screen):
 				self.softcamlist.sort()
 				self.iscam = True
 				for x in self.softcamlist:
-					os.chmod(os.path.join(config.plugins.AltSoftcam.camdir.value, x) , 0755)
+					os.chmod(os.path.join(config.plugins.AltSoftcam.camdir.value, x), 0755)
 				if self.actcam != "none" and getcamscript(self.actcam):
 					self.createcamlist()
 				else:
