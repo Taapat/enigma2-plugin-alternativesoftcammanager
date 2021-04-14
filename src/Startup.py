@@ -14,7 +14,7 @@ class RestartCam:
 	def restart(self):
 		cam = config.plugins.AltSoftcam.actcam.value
 		if cam != "none":
-			self.session.open(MessageBox, _("Restarting %s") % cam, 
+			self.session.open(MessageBox, _("Restarting %s") % cam,
 				type=MessageBox.TYPE_INFO, timeout=4)
 			stopcam(cam)
 			service = self.session.nav.getCurrentlyPlayingServiceReference()
@@ -56,4 +56,3 @@ class StartCamOnStart:
 
 
 startcamonstart = StartCamOnStart()
-
