@@ -11,7 +11,7 @@ config.plugins.AltSoftcam.camconfig = ConfigText(default="/var/keys",
 	visible_width=100, fixed_size=False)
 config.plugins.AltSoftcam.camdir = ConfigText(default="/var/emu",
 	visible_width=100, fixed_size=False)
-config.plugins.AltSoftcam.restartext = ConfigYesNo(default = True)
+config.plugins.AltSoftcam.restartext = ConfigYesNo(default=True)
 
 checkconfigdir()
 
@@ -39,15 +39,15 @@ def startcam(reason, **kwargs):
 
 
 def Plugins(**kwargs):
-	l = [PluginDescriptor(name = _("Alternative SoftCam Manager"),
-		description = _("Start, stop, restart SoftCams, change settings."),
-		where = [PluginDescriptor.WHERE_PLUGINMENU,
+	l = [PluginDescriptor(name=_("Alternative SoftCam Manager"),
+		description=_("Start, stop, restart SoftCams, change settings."),
+		where=[PluginDescriptor.WHERE_PLUGINMENU,
 		PluginDescriptor.WHERE_EXTENSIONSMENU],
-		icon = "images/softcam.png", fnc = main),
-	PluginDescriptor(where = PluginDescriptor.WHERE_AUTOSTART,
-		needsRestart = True, fnc = startcam)]
+		icon="images/softcam.png", fnc=main),
+	PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART,
+		needsRestart=True, fnc=startcam)]
 	if config.plugins.AltSoftcam.restartext.value:
-		l.append(PluginDescriptor(name = _("Restart softcam"),
-		where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = restartcam))
+		l.append(PluginDescriptor(name=_("Restart softcam"),
+		where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=restartcam))
 	return l
 
