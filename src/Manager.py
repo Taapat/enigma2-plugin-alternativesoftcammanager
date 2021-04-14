@@ -315,4 +315,3 @@ class ConfigEdit(Screen, ConfigListScreen):
 			config.plugins.AltSoftcam.camconfig.cancel()
 			config.plugins.AltSoftcam.camdir.cancel()
 			self.close()
-

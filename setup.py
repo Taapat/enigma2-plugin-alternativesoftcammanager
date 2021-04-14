@@ -12,4 +12,3 @@ setup(name='enigma2-plugin-extensions-alternativesoftcammanager',
 		description='Start, stop, restart SoftCams, change setting path',
 		cmdclass=setup_translate.cmdclass,
 	)
-

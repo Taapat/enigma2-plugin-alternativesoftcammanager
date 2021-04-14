@@ -53,4 +53,3 @@ def Plugins(**kwargs):
 		l.append(PluginDescriptor(name=_("Restart softcam"),
 		where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=restartcam))
 	return l
-
