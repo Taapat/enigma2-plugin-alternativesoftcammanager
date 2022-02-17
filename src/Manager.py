@@ -103,10 +103,10 @@ class AltCamManager(Screen):
 		self.actcam = config.plugins.AltSoftcam.actcam.value
 		self.camstartcmd = ""
 		self.actcampng = LoadPixmap(resolveFilename(SCOPE_PLUGINS,
-				"Extensions/AlternativeSoftCamManager/images/actcam.%s" % \
+				"Extensions/AlternativeSoftCamManager/images/actcam.%s" %
 						"svg" if svg_support else "png"))
 		self.defcampng = LoadPixmap(resolveFilename(SCOPE_PLUGINS,
-				"Extensions/AlternativeSoftCamManager/images/defcam.%s" % \
+				"Extensions/AlternativeSoftCamManager/images/defcam.%s" %
 						"svg" if svg_support else "png"))
 		self.stoppingTimer = eTimer()
 		self.stoppingTimer.timeout.callback.append(self.stopping)
