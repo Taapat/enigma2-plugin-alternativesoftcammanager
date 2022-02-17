@@ -1,18 +1,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-17 23:43+0200\n"
 "PO-Revision-Date: 2015-01-25 23:42+0200\n"
 "Last-Translator: Tapat <taapat@gmail.com>\n"
+"Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.7\n"
-"Language-Team: \n"
 
 msgid "Alternative SoftCam Manager"
 msgstr "Альтернативный Softcam менеджер"
 
+#, python-format
 msgid ""
 "Directory %s does not exist!\n"
 "Please set the correct directory path!"
@@ -26,15 +29,13 @@ msgstr "Выход"
 msgid "Ok"
 msgstr "Ок"
 
-msgid "Really close without saving settings?"
-msgstr "Действительно закрыть без сохранения настроек?"
-
 msgid "Restart"
 msgstr "Перезагрузить"
 
 msgid "Restart softcam"
 msgstr "Перезагрузить эмулятор"
 
+#, python-format
 msgid "Restarting %s"
 msgstr "Перезагружается %s"
 
@@ -60,14 +61,15 @@ msgid "Start"
 msgstr "Запустить"
 
 msgid "Start, stop, restart SoftCams, change settings."
-msgstr ""
-"Запускает, останавливает, перезапускает Эмуляторы, управляет настройками."
+msgstr "Запускает, останавливает, перезапускает Эмуляторы, управляет настройками."
 
+#, python-format
 msgid "Starting %s"
 msgstr "Запускается %s"
 
 msgid "Stop"
 msgstr "Остановить"
 
+#, python-format
 msgid "Stopping %s"
 msgstr "Останавливается %s"

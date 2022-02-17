@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-17 23:43+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Budiarno\n"
 "Language-Team: \n"
@@ -14,6 +15,7 @@ msgstr ""
 msgid "Alternative SoftCam Manager"
 msgstr "Alternative SoftCam Manager"
 
+#, python-format
 msgid ""
 "Directory %s does not exist!\n"
 "Please set the correct directory path!"
@@ -27,17 +29,21 @@ msgstr "Keluar"
 msgid "Ok"
 msgstr "Ok"
 
-msgid "Really close without saving settings?"
-msgstr "Yakin keluar tanpa menyimpan pengaturan?"
-
 msgid "Restart"
 msgstr "Mulai lagi"
 
+msgid "Restart softcam"
+msgstr "Mulai lagi SoftCam"
+
+#, python-format
 msgid "Restarting %s"
 msgstr " %s sedang mulai lagi"
 
 msgid "Setup"
 msgstr "Atur"
+
+msgid "Show 'Restart softcam' in extensions menu"
+msgstr "Tampilkan 'Mulai lagi SoftCam' di menu ekstensi"
 
 msgid "SoftCam config directory"
 msgstr "Direktori konfig SoftCam"
@@ -57,17 +63,13 @@ msgstr "Mulai"
 msgid "Start, stop, restart SoftCams, change settings."
 msgstr "Mulai, berhenti, mulai lagi SoftCam, ubah pengaturan."
 
+#, python-format
 msgid "Starting %s"
 msgstr " %s sedang memulai"
 
 msgid "Stop"
 msgstr "Berhenti"
 
+#, python-format
 msgid "Stopping %s"
 msgstr "%s sedang berhenti"
-
-msgid "Show 'Restart softcam' in extensions menu"
-msgstr "Tampilkan 'Mulai lagi SoftCam' di menu ekstensi"
-
-msgid "Restart softcam"
-msgstr "Mulai lagi SoftCam"
