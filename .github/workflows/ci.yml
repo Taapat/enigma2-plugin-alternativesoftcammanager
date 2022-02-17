@@ -34,7 +34,7 @@ jobs:
           python -O -m compileall ./src/
       - name: Check code with flake8
         run: |
-          python3 -m flake8 --ignore=W191,E117,E126,E128,E501,F821 --show-source
+          flake8 --ignore=W191,E117,E126,E128,E501,F821 --show-source
   test-language:
     needs: test-python
     if: needs.test-python.result == 'success'
