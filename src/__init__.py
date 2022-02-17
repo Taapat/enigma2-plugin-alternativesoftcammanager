@@ -20,3 +20,12 @@ def _(txt):
 
 localeInit()
 language.addCallback(localeInit)
+
+
+try:
+	# Check functions for full svg and scaling support
+	from enigma import loadSVG
+	from skin import applySkinFactor
+	svg_support = True
+except ImportError:
+	svg_support = False

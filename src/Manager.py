@@ -17,50 +17,69 @@ from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 
-from . import _
+from . import _, svg_support
 from .Softcam import checkconfigdir, getcamcmd, getcamscript, stopcam
 
 
 class AltCamManager(Screen):
-	skin = """
-		<screen position="center,center" size="630,370" title="SoftCam manager">
-			<eLabel position="5,0" size="620,2" backgroundColor="#aaaaaa" />
-			<widget source="list" render="Listbox" position="10,15" size="340,300" \
-				scrollbarMode="showOnDemand">
-				<convert type="TemplatedMultiContent">
-				{
-					"template": [MultiContentEntryText(pos=(65, 10), size=(275, 40), \
-							font=0, flags=RT_HALIGN_LEFT, text=0),
-						MultiContentEntryPixmapAlphaTest(pos=(5, 5), \
-							size=(51, 40), png=1),
-						MultiContentEntryText(pos=(5, 25), size=(51, 16), font=1, \
-							flags=RT_HALIGN_CENTER, text=2),],
-					"fonts": [gFont("Regular", 26), gFont("Regular", 12)],
-					"itemHeight": 50
-				}
-				</convert>
-			</widget>
-			<eLabel halign="center" position="390,10" size="210,35" font="Regular;20" \
-				text="Ecm info" transparent="1" />
-			<widget name="status" position="360,50" size="320,300" font="Regular;16" \
-				halign="left" />
-			<ePixmap position="16,321" size="140,40" pixmap="skin_default/buttons/red.png" \
-				transparent="1" alphatest="on" />
-			<ePixmap position="169,321" size="140,40" pixmap="skin_default/buttons/green.png" \
-				transparent="1" alphatest="on" />
-			<ePixmap position="322,321" size="140,40" pixmap="skin_default/buttons/yellow.png" \
-				transparent="1" alphatest="on" />
-			<ePixmap position="475,321" size="140,40" pixmap="skin_default/buttons/blue.png" \
-				transparent="1" alphatest="on" />
-			<widget source="key_red" render="Label" position="12,328" zPosition="2" size="148,30" \
-				valign="center" halign="center" font="Regular;22" transparent="1" />
-			<widget source="key_green" render="Label" position="165,328" zPosition="2" size="148,30" \
-				valign="center" halign="center" font="Regular;22" transparent="1" />
-			<widget source="key_yellow" render="Label" position="318,328" zPosition="2" size="148,30" \
-				valign="center" halign="center" font="Regular;22" transparent="1" />
-			<widget source="key_blue" render="Label" position="471,328" zPosition="2" size="148,30" \
-				valign="center" halign="center" font="Regular;22" transparent="1" />
-		</screen>"""
+	if svg_support:
+		skin = """<screen name="AltCamManager" position="center,center" size="660*f,410*f">
+				<widget source="list" render="Listbox" position="10*f,10*f" size="355*f,300*f" \
+						enableWrapAround="1" scrollbarMode="showOnDemand">
+					<convert type="TemplatedMultiContent">
+						{"template": [
+							MultiContentEntryText(pos=(65*f,10*f), size=(275*f,40*f), \
+								font=0, flags=RT_HALIGN_LEFT, text=0),
+							MultiContentEntryPixmapAlphaTest(pos=(5*f,5*f), size=(51*f,40*f), \
+								png=1, flags=BT_SCALE),
+							MultiContentEntryText(pos=(5*f,25*f), size=(51*f,16*f), \
+								font=1, flags=RT_HALIGN_CENTER, text=2)],
+						"fonts": [gFont("Regular",24*f), gFont("Regular",12*f)],
+						"itemHeight": 50*f}
+					</convert>
+				</widget>
+				<eLabel text="Ecm info" position="385*f,0" size="260*f,35*f" font="Regular;24*f"/>
+				<widget name="status" position="385*f,40*f" size="260*f,280*f" font="Regular;16*f"/>
+				<panel name="DynamicButtonsTemplate"/>
+			</screen>"""
+	else:
+		skin = """<screen position="center,center" size="630,370" title="SoftCam manager">
+				<eLabel position="5,0" size="620,2" backgroundColor="#aaaaaa" />
+				<widget source="list" render="Listbox" position="10,15" size="340,300" \
+						scrollbarMode="showOnDemand">
+					<convert type="TemplatedMultiContent">
+						{"template": [
+							MultiContentEntryText(pos=(65,10), size=(275,40), \
+								font=0, flags=RT_HALIGN_LEFT, text=0),
+							MultiContentEntryPixmapAlphaTest(pos=(5,5), \
+								size=(51,40), png=1),
+							MultiContentEntryText(pos=(5, 25), size=(51,16), font=1, \
+								flags=RT_HALIGN_CENTER, text=2),],
+						"fonts": [gFont("Regular",26), gFont("Regular",12)],
+						"itemHeight": 50}
+					</convert>
+				</widget>
+				<eLabel halign="center" position="390,10" size="210,35" font="Regular;20" \
+					text="Ecm info" transparent="1"/>
+				<widget name="status" position="360,50" size="320,300" font="Regular;16" \
+					halign="left"/>
+				<ePixmap position="16,321" size="140,40" pixmap="skin_default/buttons/red.png" \
+					transparent="1" alphatest="on"/>
+				<ePixmap position="169,321" size="140,40" pixmap="skin_default/buttons/green.png" \
+					transparent="1" alphatest="on"/>
+				<ePixmap position="322,321" size="140,40" pixmap="skin_default/buttons/yellow.png" \
+					transparent="1" alphatest="on"/>
+				<ePixmap position="475,321" size="140,40" pixmap="skin_default/buttons/blue.png" \
+					transparent="1" alphatest="on"/>
+				<widget source="key_red" render="Label" position="12,328" zPosition="2" size="148,30" \
+					valign="center" halign="center" font="Regular;22" transparent="1"/>
+				<widget source="key_green" render="Label" position="165,328" zPosition="2" size="148,30" \
+					valign="center" halign="center" font="Regular;22" transparent="1"/>
+				<widget source="key_yellow" render="Label" position="318,328" zPosition="2" size="148,30" \
+					valign="center" halign="center" font="Regular;22" transparent="1"/>
+				<widget source="key_blue" render="Label" position="471,328" zPosition="2" size="148,30" \
+					valign="center" halign="center" font="Regular;22" transparent="1"/>
+			</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -84,9 +103,11 @@ class AltCamManager(Screen):
 		self.actcam = config.plugins.AltSoftcam.actcam.value
 		self.camstartcmd = ""
 		self.actcampng = LoadPixmap(resolveFilename(SCOPE_PLUGINS,
-				"Extensions/AlternativeSoftCamManager/images/actcam.png"))
+				"Extensions/AlternativeSoftCamManager/images/actcam.%s" % \
+						"svg" if svg_support else "png"))
 		self.defcampng = LoadPixmap(resolveFilename(SCOPE_PLUGINS,
-				"Extensions/AlternativeSoftCamManager/images/defcam.png"))
+				"Extensions/AlternativeSoftCamManager/images/defcam.%s" % \
+						"svg" if svg_support else "png"))
 		self.stoppingTimer = eTimer()
 		self.stoppingTimer.timeout.callback.append(self.stopping)
 		self.closestopTimer = eTimer()

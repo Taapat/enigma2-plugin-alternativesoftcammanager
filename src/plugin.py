@@ -6,7 +6,7 @@ from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo
 from Components.Console import Console
 from Plugins.Plugin import PluginDescriptor
 
-from . import _
+from . import _, svg_support
 from .Softcam import checkconfigdir, getcamcmd, stopcam
 
 
@@ -94,7 +94,7 @@ def Plugins(**kwargs):
 			description=_("Start, stop, restart SoftCams, change settings."),
 			where=[PluginDescriptor.WHERE_PLUGINMENU,
 					PluginDescriptor.WHERE_EXTENSIONSMENU],
-			icon="images/softcam.png",
+			icon="images/softcam.%s" % "svg" if svg_support else "png",
 			fnc=main),
 		PluginDescriptor(
 			where=PluginDescriptor.WHERE_AUTOSTART,

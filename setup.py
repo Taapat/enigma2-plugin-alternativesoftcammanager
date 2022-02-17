@@ -29,5 +29,5 @@ setup(name='enigma2-plugin-extensions-alternativesoftcammanager',
 		author_email='taapat@gmail.com',
 		package_dir={PLUGIN_DIR: 'src'},
 		packages=[PLUGIN_DIR],
-		package_data={PLUGIN_DIR: ['images/*.png', 'locale/*/LC_MESSAGES/*.mo']},
+		package_data={PLUGIN_DIR: ['images/*.png', 'images/*.svg', 'locale/*/LC_MESSAGES/*.mo']},
 		description='Start, stop, restart SoftCams, change setting path')
