@@ -24,8 +24,8 @@ language.addCallback(localeInit)
 
 try:
 	# Check functions for full svg and scaling support
-	from enigma import loadSVG
-	from skin import applySkinFactor
+	from enigma import loadSVG  # noqa: F401
+	from skin import applySkinFactor  # noqa: F401
 	svg_support = True
 except ImportError:
 	svg_support = False

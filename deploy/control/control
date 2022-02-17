@@ -1,0 +1,11 @@
+Package: enigma2-plugin-extensions-alternativesoftcammanager
+Version:
+Description: enigma2-plugin-extensions-alternativesoftcammanager
+ Start, stop, restart SoftCams, change setting path
+Section: base
+Priority: optional
+Maintainer: Taapat <taapat@gmail.com>
+License: PD
+Architecture: all
+OE: enigma2-plugin-extensions-alternativesoftcammanager
+Homepage: https://github.com/Taapat/enigma2-plugin-alternativesoftcammanager

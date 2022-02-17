@@ -1,0 +1,123 @@
+name: build
+
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+
+jobs:
+  test-python:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [2.7, 3.8]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Upgrade pip
+        if: matrix.python-version != '2.7'
+        run: |
+          python -m pip install --upgrade pip
+      - name: Install dependencies
+        run: |
+          pip install flake8
+      - name: Compile sources
+        run: |
+          python -O -m compileall ./src/
+      - name: Check code with flake8
+        run: |
+          python3 -m flake8 --ignore=W191,E117,E126,E128,E501,F821 --show-source
+  test-language:
+    needs: test-python
+    if: needs.test-python.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: |
+          sudo apt-get install gettext
+      - name: Compile language files
+        run: |
+          for i in $(ls -1 ./po/*.po); do $(msgfmt "$i" -o "$i".mo); done
+  deploy:
+    needs: test-language
+    if: needs.test-language.result == 'success' && !contains(github.event.head_commit.message,'skip-release') && github.event_name == 'push' && github.repository == 'Taapat/enigma2-plugin-alternativesoftcammanager' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up Python 2.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: '2.7'
+      - name: Install dependencies
+        run: |
+          sudo apt-get install gettext
+      - name: Build sources
+        run: |
+          python setup.py build --build-lib=build/lib
+      - name: Set git variables
+        run: |
+          echo "SRCPV=git$(git rev-list --count HEAD)" >> $GITHUB_ENV
+          echo "SHA7=${GITHUB_SHA::7}" >> $GITHUB_ENV
+          echo "COMMIT_SUBJECT=$(git log -1 --pretty=format:%s)" >> $GITHUB_ENV
+      - name: Create plugin package files
+        run: |
+          mkdir -p deploy/data/usr/lib/enigma2/python/Plugins
+          cp -r build/lib/* deploy/data/usr/lib/enigma2/python/Plugins
+          sed -i 's/Version:/Version: 1+${{ env.SRCPV }}+${{ env.SHA7 }}-r0.0/' deploy/control/control
+          mkdir ipk
+      - name: Compile python sources
+        run: |
+          python -O -m compileall deploy/data/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager/
+      - name: Build python data package
+        working-directory: './deploy/data'
+        run: |
+          tar --numeric-owner --group=0 --owner=0 -czf ../data.tar.gz ./*
+      - name: Build python control package
+        working-directory: './deploy/control'
+        run: |
+          tar --numeric-owner --group=0 --owner=0 -czf ../control.tar.gz ./*
+      - name: Build python ipk package
+        working-directory: './deploy'
+        run: |
+          echo 2.0 > debian-binary
+          ar rv ../ipk/enigma2-plugin-extensions-alternativesoftcammanager_1+${{ env.SRCPV }}+${{ env.SHA7 }}-r0.0_all.ipk debian-binary data.tar.gz control.tar.gz
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.SRCPV }}
+          release_name: ${{ env.COMMIT_SUBJECT }}
+          draft: false
+          prerelease: false
+      - name: Upload release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./ipk/enigma2-plugin-extensions-alternativesoftcammanager_1+${{ env.SRCPV }}+${{ env.SHA7 }}-r0.0_all.ipk
+          asset_name: enigma2-plugin-extensions-alternativesoftcammanager_1+${{ env.SRCPV }}+${{ env.SHA7 }}-r0.0_all.ipk
+          asset_content_type: application/ipk
+      - name: Upload ipk via ftp
+        uses: sebastianpopp/ftp-action@releases/v2
+        with:
+          host: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          localDir: 'ipk'
+          remoteDir: ${{ secrets.FTP_DIR }}
