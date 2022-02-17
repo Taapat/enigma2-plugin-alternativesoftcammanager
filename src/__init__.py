@@ -8,7 +8,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 def localeInit():
 	environ["LANGUAGE"] = language.getLanguage()[:2]
 	bindtextdomain("AlternativeSoftCamManager", resolveFilename(SCOPE_PLUGINS,
-		"Extensions/AlternativeSoftCamManager/locale"))
+			"Extensions/AlternativeSoftCamManager/locale"))
 
 
 def _(txt):

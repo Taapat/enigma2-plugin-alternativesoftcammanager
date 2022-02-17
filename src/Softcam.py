@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import os
 
 from Components.config import config
@@ -6,85 +8,63 @@ from Components.Console import Console
 
 def getcamcmd(cam):
 	camname = cam.lower()
+	camdir = config.plugins.AltSoftcam.camdir.value
+	camconfig = config.plugins.AltSoftcam.camconfig.value
 	if getcamscript(camname):
-		return config.plugins.AltSoftcam.camdir.value + "/" + cam + " start"
+		return "%s/%s start" % (camdir, cam)
 	elif "oscam" in camname:
-		return config.plugins.AltSoftcam.camdir.value + "/" + cam + " -bc " + \
-			config.plugins.AltSoftcam.camconfig.value + "/"
+		return "%s/%s -bc %s/" % (camdir, cam, camconfig)
 	elif "wicard" in camname:
-		return "ulimit -s 512; " + config.plugins.AltSoftcam.camdir.value + \
-		"/" + cam + " -d -c " + config.plugins.AltSoftcam.camconfig.value + \
-		"/wicardd.conf"
+		return "ulimit -s 512; %s/%s -d -c %s/wicardd.conf" % (camdir, cam, camconfig)
 	elif "camd3" in camname:
-		return config.plugins.AltSoftcam.camdir.value + "/" + cam + " " + \
-			config.plugins.AltSoftcam.camconfig.value + "/camd3.config"
+		return "%s/%s %s/camd3.config" % (camdir, cam, camconfig)
 	elif "mbox" in camname:
-		return config.plugins.AltSoftcam.camdir.value + "/" + cam + " " + \
-			config.plugins.AltSoftcam.camconfig.value + "/mbox.cfg"
+		return "%s/%s %s/mbox.cfg" % (camdir, cam, camconfig)
 	elif "mpcs" in camname:
-		return config.plugins.AltSoftcam.camdir.value + "/" + cam + " -c " + \
-			config.plugins.AltSoftcam.camconfig.value
+		return "%s/%s -c %s/" % (camdir, cam, camconfig)
 	elif "newcs" in camname:
-		return config.plugins.AltSoftcam.camdir.value + "/" + cam + " -C " + \
-			config.plugins.AltSoftcam.camconfig.value + "/newcs.conf"
+		return "%s/%s -C %s/newcs.conf" % (camdir, cam, camconfig)
 	elif "vizcam" in camname:
-		return config.plugins.AltSoftcam.camdir.value + "/" + cam + " -b -c " + \
-			config.plugins.AltSoftcam.camconfig.value + "/"
-	elif "rucam" in camname:
-		if not os.path.exists("/proc/sparkid"):
-			if os.path.exists("/lib/modules/encrypt.ko"):
-				Console().ePopen("insmod /lib/modules/encrypt.ko")
-			else:
-				for version in os.listdir("/lib/modules"):
-					if os.path.exists("/lib/modules/%s/extra/encrypt/encrypt.ko" % version):
-						Console().ePopen("modprobe encrypt")
-			sparkid = config.plugins.AltSoftcam.camconfig.value + "/sparkid"
-			if os.path.exists(sparkid):
-				cmd = "cat " + sparkid + " > /proc/sparkid"
-				from time import sleep
-				sleep(2)
-				Console().ePopen(cmd)
-		return config.plugins.AltSoftcam.camdir.value + "/" + cam + " -b"
-	return config.plugins.AltSoftcam.camdir.value + "/" + cam
+		return "%s/%s -b -c %s/" % (camdir, cam, camconfig)
+	return "%s/%s" % (camdir, cam)
 
 
 def getcamscript(cam):
 	cam = cam.lower()
 	if cam[-3:] == ".sh" or cam[:7] == "softcam" or cam[:10] == "cardserver":
 		return True
-	return False
 
 
 def stopcam(cam):
 	if getcamscript(cam):
-		cmd = config.plugins.AltSoftcam.camdir.value + "/" + cam + " stop"
+		cmd = "%s/%s stop" % (config.plugins.AltSoftcam.camdir.value, cam)
 	else:
-		cmd = "killall -15 " + cam
-	print "[Alternative SoftCam Manager] stopping", cam
+		cmd = "killall -15 %s" % cam
+	print("[Alternative SoftCam Manager] stopping", cam)
 	Console().ePopen(cmd)
 	try:
 		os.remove("/tmp/ecm.info")
-	except:
+	except OSError:
 		pass
 
 
-def __createdir(list):
-	dir = ""
-	for line in list[1:].split("/"):
-		dir += "/" + line
-		if not os.path.exists(dir):
-			try:
-				os.mkdir(dir)
-			except:
-				print "[Alternative SoftCam Manager] Failed to mkdir", dir
-
-
 def checkconfigdir():
+	def createdir(dir_list):
+		new_dir = ""
+		for line in dir_list[1:].split("/"):
+			new_dir += "/%s" % line
+			if not os.path.exists(new_dir):
+				try:
+					os.mkdir(new_dir)
+				except OSError as e:
+					print("[Alternative SoftCam Manager] Failed to mkdir", e)
+					break
+
 	if not os.path.exists(config.plugins.AltSoftcam.camconfig.value):
-		__createdir("/var/keys")
+		createdir("/var/keys")
 		config.plugins.AltSoftcam.camconfig.value = "/var/keys"
 		config.plugins.AltSoftcam.camconfig.save()
 	if not os.path.exists(config.plugins.AltSoftcam.camdir.value):
-		__createdir("/var/emu")
+		createdir("/var/emu")
 		config.plugins.AltSoftcam.camdir.value = "/var/emu"
 		config.plugins.AltSoftcam.camdir.save()
