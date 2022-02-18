@@ -37,7 +37,6 @@ jobs:
           flake8 --ignore=W191,E117,E126,E128,E501,F821 --show-source
   test-language:
     needs: test-python
-    if: needs.test-python.result == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -51,7 +50,7 @@ jobs:
           for i in $(ls -1 ./po/*.po); do $(msgfmt "$i" -o "$i".mo); done
   deploy:
     needs: test-language
-    if: needs.test-language.result == 'success' && !contains(github.event.head_commit.message,'skip-release') && github.event_name == 'push' && github.repository == 'Taapat/enigma2-plugin-alternativesoftcammanager' && github.ref == 'refs/heads/master'
+    if: !contains(github.event.head_commit.message,'skip-release') && github.event_name == 'push' && github.repository == 'Taapat/enigma2-plugin-alternativesoftcammanager' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
