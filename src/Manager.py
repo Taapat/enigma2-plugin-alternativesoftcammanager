@@ -104,10 +104,10 @@ class AltCamManager(Screen):
 		self.camstartcmd = ""
 		self.actcampng = LoadPixmap(resolveFilename(SCOPE_PLUGINS,
 				"Extensions/AlternativeSoftCamManager/images/actcam.%s" %
-						"svg" if svg_support else "png"))
+						("svg" if svg_support else "png")))
 		self.defcampng = LoadPixmap(resolveFilename(SCOPE_PLUGINS,
 				"Extensions/AlternativeSoftCamManager/images/defcam.%s" %
-						"svg" if svg_support else "png"))
+						("svg" if svg_support else "png")))
 		self.stoppingTimer = eTimer()
 		self.stoppingTimer.timeout.callback.append(self.stopping)
 		self.closestopTimer = eTimer()
@@ -149,7 +149,7 @@ class AltCamManager(Screen):
 			self.camliststart()
 
 	def camactive(self, result, retval, extra_args):
-		if result.strip():
+		if result.decode("utf-8").strip():
 			self.createcamlist()
 		else:
 			self.actcam = "none"
@@ -159,7 +159,7 @@ class AltCamManager(Screen):
 			self.checkConsole.ePopen("echo 1", self.camactivefromlist, "none")
 
 	def camactivefromlist(self, result, retval, extra_args):
-		if result.strip():
+		if result.decode("utf-8").strip():
 			self.actcam = extra_args
 			self.createcamlist()
 		else:

@@ -36,7 +36,7 @@ class StartCamOnStart():
 		self.Console.ePopen("ps", self.checkprocess)
 
 	def checkprocess(self, result, retval, extra_args):
-		processes = result.lower()
+		processes = result.decode("utf-8").lower()
 		camlist = ["oscam", "mgcamd", "wicard", "camd3", "mcas", "cccam",
 				"gbox", "mpcs", "mbox", "newcs", "vizcam", "rucam"]
 		camlist.insert(0, config.plugins.AltSoftcam.actcam.value)
@@ -94,7 +94,7 @@ def Plugins(**kwargs):
 			description=_("Start, stop, restart SoftCams, change settings."),
 			where=[PluginDescriptor.WHERE_PLUGINMENU,
 					PluginDescriptor.WHERE_EXTENSIONSMENU],
-			icon="images/softcam.%s" % "svg" if svg_support else "png",
+			icon="images/softcam.%s" % ("svg" if svg_support else "png"),
 			fnc=main),
 		PluginDescriptor(
 			where=PluginDescriptor.WHERE_AUTOSTART,
