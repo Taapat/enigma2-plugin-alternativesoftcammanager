@@ -149,7 +149,7 @@ class AltCamManager(Screen):
 			self.camliststart()
 
 	def camactive(self, result, retval, extra_args):
-		if result.decode("utf-8").strip():
+		if result.strip():
 			self.createcamlist()
 		else:
 			self.actcam = "none"
@@ -159,7 +159,7 @@ class AltCamManager(Screen):
 			self.checkConsole.ePopen("echo 1", self.camactivefromlist, "none")
 
 	def camactivefromlist(self, result, retval, extra_args):
-		if result.decode("utf-8").strip():
+		if result.strip():
 			self.actcam = extra_args
 			self.createcamlist()
 		else:

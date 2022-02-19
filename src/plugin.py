@@ -36,7 +36,9 @@ class StartCamOnStart():
 		self.Console.ePopen("ps", self.checkprocess)
 
 	def checkprocess(self, result, retval, extra_args):
-		processes = result.decode("utf-8").lower()
+		if hasattr(result, 'decode'):
+			result = result.decode("utf-8")
+		processes = result.lower()
 		camlist = ["oscam", "mgcamd", "wicard", "camd3", "mcas", "cccam",
 				"gbox", "mpcs", "mbox", "newcs", "vizcam", "rucam"]
 		camlist.insert(0, config.plugins.AltSoftcam.actcam.value)
