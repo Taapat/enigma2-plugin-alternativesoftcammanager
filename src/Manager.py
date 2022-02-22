@@ -109,12 +109,27 @@ class AltCamManager(Screen):
 				"Extensions/AlternativeSoftCamManager/images/defcam.%s" %
 						("svg" if svg_support else "png")))
 		self.stoppingTimer = eTimer()
-		self.stoppingTimer.timeout.callback.append(self.stopping)
+		# Edit DreamOS
+		#self.stoppingTimer.timeout.callback.append(self.stopping)
+		try:
+			self.stoppingTimer_conn = self.stoppingTimer.timeout.connect(self.stopping)
+		except:
+			self.stoppingTimer.timeout.get().append(self.stopping)
 		self.closestopTimer = eTimer()
-		self.closestopTimer.timeout.callback.append(self.createinfo)
+		# Edit DreamOS
+		#self.closestopTimer.timeout.callback.append(self.createinfo)
+		try:
+			self.closestopTimer_conn = self.closestopTimer.timeout.connect(self.createinfo)
+		except:
+			self.closestopTimer.timeout.get().append(self.createinfo)
 		self.createinfo()
 		self.Timer = eTimer()
-		self.Timer.callback.append(self.listecminfo)
+		# Edit DreamOS
+		#self.Timer.callback.append(self.listecminfo)
+		try:
+			self.Timer_conn = self.Timer.timeout.connect(self.listecminfo)
+		except:
+			self.Timer.callback.append(self.listecminfo)
 		self.Timer.start(2000, False)
 
 	def listecminfo(self):
@@ -247,7 +262,12 @@ class AltCamManager(Screen):
 			self.close()
 		else:  # if list setting not completed as they should
 			self.cancelTimer = eTimer()
-			self.cancelTimer.timeout.callback.append(self.setfinish)
+			#Edit DreamOS
+			#self.cancelTimer.timeout.callback.append(self.setfinish)
+			try:
+				self.cancelTimer_conn = self.cancelTimer.timeout.get().connect(self.listecminfo)
+			except:
+				self.cancelTimer.timeout.get().append(self.setfinish)
 			self.cancelTimer.start(4000, True)
 
 	def setfinish(self):
