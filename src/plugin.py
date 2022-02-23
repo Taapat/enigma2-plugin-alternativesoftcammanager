@@ -26,10 +26,12 @@ class StartCamOnStart():
 	def __init__(self):
 		self.Console = Console()
 		self.Timer = eTimer()
-		try:  # Edit DreamOS
+		#Edit DreamOS
+		#self.Timer.timeout.callback.append(self.camnotrun)
+		try:
 			self.Timer_conn = self.Timer.timeout.connect(self.camnotrun)
 		except:
-			self.Timer.timeout.callback.append(self.camnotrun)
+			self.Timer.timeout.get().append(self.camnotrun)
 		self.Timer.start(2000, True)
 
 	def start(self):

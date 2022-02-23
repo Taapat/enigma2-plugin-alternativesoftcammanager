@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Alternative SoftCam Manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 22:26+0300\n"
-"PO-Revision-Date: 2022-02-23 11:40+0300\n"
+"PO-Revision-Date: 2022-02-22 22:30+0300\n"
 "Last-Translator: audi06_19 <audi06_19@hotmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -41,7 +41,7 @@ msgstr "Tamam"
 
 #: Manager.py:90
 msgid "Restart"
-msgstr "Y. başlat"
+msgstr "Yeniden başlat"
 
 #: plugin.py:113
 msgid "Restart softcam"
