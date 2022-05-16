@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Alternative SoftCam  Manager\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: lareq <lareq@lareq.eu>\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Language: pl\n"
+
+msgid "Alternative SoftCam Manager"
+msgstr ""
+
+#, python-format
+msgid ""
+"Directory %s does not exist!\n"
+"Please set the correct directory path!"
+msgstr ""
+"Katalog %s nie istnieje!\n"
+"Ustaw poprawną ścieżkę katalogu!"
+
+msgid "Exit"
+msgstr "Wyjście"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Restart"
+msgstr "Restart"
+
+msgid "Restart softcam"
+msgstr "Restart SoftCama"
+
+#, python-format
+msgid "Restarting %s"
+msgstr "Restartuję %s"
+
+msgid "Setup"
+msgstr "Konfiguracja"
+
+msgid "Show 'Restart softcam' in extensions menu"
+msgstr "Pokaż „Restart softcam” w menu rozszerzeń"
+
+msgid "SoftCam config directory"
+msgstr "Katalog konfiguracji SoftCam"
+
+msgid "SoftCam directory"
+msgstr "Katalog SoftCam"
+
+msgid "SoftCam manager"
+msgstr "Menadżer SoftCam"
+
+msgid "SoftCam path configuration"
+msgstr "Konfiguracja ścieżki SoftCam"
+
+msgid "Start"
+msgstr "Uruchom"
+
+msgid "Start, stop, restart SoftCams, change settings."
+msgstr "Uruchom, zatrzymaj, zrestartuj SoftCam, zmień ustawienia"
+
+#, python-format
+msgid "Starting %s"
+msgstr "Uruchamianie %s"
+
+msgid "Stop"
+msgstr "Zatrzymaj"
+
+#, python-format
+msgid "Stopping %s"
+msgstr "Zatrzymywanie %s"
