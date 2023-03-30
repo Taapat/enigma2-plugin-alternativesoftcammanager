@@ -124,10 +124,15 @@ class AltCamManager(Screen):
 		self.Timer.start(2000, False)
 
 	def listecminfo(self):
-		try:
-			self["status"].text = open("/tmp/ecm.info", "r").read()
-		except IOError:
-			self["status"].text = ""
+		ecm_file = "/tmp/ecm.info"
+		if os.path.exists(ecm_file):
+			try:
+				with open(ecm_file) as f:
+					self["status"].text = f.read()
+					return
+			except IOError:
+				pass
+		self["status"].text = ""
 
 	def createinfo(self, retval=None):
 		self.iscam = False
