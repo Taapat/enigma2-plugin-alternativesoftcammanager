@@ -13,19 +13,30 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [2.7, 3.8]
+        python-version: ['2.7', '3.11']
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Python 3
+        if: matrix.python-version != '2.7'
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Upgrade pip
+      - name: Upgrade Python 3 pip
         if: matrix.python-version != '2.7'
         run: |
           python -m pip install --upgrade pip
+      - name: Set up Python 2
+        if: matrix.python-version == '2.7'
+        run: |
+          sudo apt install -y python2
+          sudo ln -sf /usr/bin/python2 /usr/bin/python
+          curl -L -O "https://bootstrap.pypa.io/pip/2.7/get-pip.py"
+          python get-pip.py
       - name: Install dependencies
         run: |
           pip install flake8
@@ -53,13 +64,12 @@ jobs:
     if: github.event_name == 'push' && !contains(github.event.head_commit.message,'skip-release') && github.repository == 'Taapat/enigma2-plugin-alternativesoftcammanager' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - name: Set up Python 2.7
-        uses: actions/setup-python@v2
-        with:
-          python-version: '2.7'
+        run: |
+          sudo apt install -y python2
       - name: Install dependencies
         run: |
           sudo apt-get install gettext
@@ -69,13 +79,13 @@ jobs:
       - name: Set git variables
         run: |
           echo "SRCPV=git$(git rev-list --count HEAD)" >> $GITHUB_ENV
-          echo "SHA7=${GITHUB_SHA::7}" >> $GITHUB_ENV
+          echo "PKGV=1+git$(git rev-list --count HEAD)+${GITHUB_SHA::7}-r0.0" >> $GITHUB_ENV
           echo "COMMIT_SUBJECT=$(git log -1 --pretty=format:%s)" >> $GITHUB_ENV
       - name: Create plugin package files
         run: |
           mkdir -p deploy/data/usr/lib/enigma2/python/Plugins
           cp -r build/lib/* deploy/data/usr/lib/enigma2/python/Plugins
-          sed -i 's/Version:/Version: 1+${{ env.SRCPV }}+${{ env.SHA7 }}-r0.0/' deploy/control/control
+          sed -i 's/Version:/Version: ${{ env.env.PKGV }}/' deploy/control/control
           mkdir ipk
       - name: Compile python sources
         run: |
@@ -92,26 +102,16 @@ jobs:
         working-directory: './deploy'
         run: |
           echo 2.0 > debian-binary
-          ar rv ../ipk/enigma2-plugin-extensions-alternativesoftcammanager_1+${{ env.SRCPV }}+${{ env.SHA7 }}-r0.0_all.ipk debian-binary data.tar.gz control.tar.gz
+          ar rv ../ipk/enigma2-plugin-extensions-alternativesoftcammanager_${{ env.env.PKGV }}_all.ipk debian-binary data.tar.gz control.tar.gz
       - name: Create release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: Taapat/github-release@v2.1.0
         with:
-          tag_name: ${{ env.SRCPV }}
-          release_name: ${{ env.COMMIT_SUBJECT }}
-          draft: false
-          prerelease: false
-      - name: Upload release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./ipk/enigma2-plugin-extensions-alternativesoftcammanager_1+${{ env.SRCPV }}+${{ env.SHA7 }}-r0.0_all.ipk
-          asset_name: enigma2-plugin-extensions-alternativesoftcammanager_1+${{ env.SRCPV }}+${{ env.SHA7 }}-r0.0_all.ipk
-          asset_content_type: application/ipk
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ env.SRCPV }}
+          name: ${{ env.COMMIT_SUBJECT }}
+          gzip: false
+          files: >
+            ipk/enigma2-plugin-extensions-alternativesoftcammanager_${{ env.env.PKGV }}_all.ipk
       - name: Upload ipk via ftp
         uses: sebastianpopp/ftp-action@releases/v2
         with:
