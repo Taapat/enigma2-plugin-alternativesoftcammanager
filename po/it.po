@@ -1,0 +1,79 @@
+# Signed-off-by: Dario Croci <spaeleus@croci.org>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AlternativeSoftCamManager git40-2f55cbd-r0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-11 18:10+0200\n"
+"PO-Revision-Date: 2023-12-09 18:16+0100\n"
+"Last-Translator: Dario Croci <spaeleus@croci.org>\n"
+"Language-Team: Dario Croci <spaeleus@croci.org>\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+"X-Poedit-Basepath: ../../../../../../../../..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+msgid "Alternative SoftCam Manager"
+msgstr "Alternative SoftCam Manager"
+
+#, python-format
+msgid ""
+"Directory %s does not exist!\n"
+"Please set the correct directory path!"
+msgstr ""
+"Directory %s non presente.\n"
+"Inserire il percorso corretto della directory."
+
+msgid "Exit"
+msgstr "Uscire"
+
+msgid "Ok"
+msgstr "OK"
+
+msgid "Restart"
+msgstr "Riavviare"
+
+msgid "Restart softcam"
+msgstr "Riavviare softcam"
+
+#, python-format
+msgid "Restarting %s"
+msgstr "Riavvio di %s..."
+
+msgid "Setup"
+msgstr "Impostazioni"
+
+msgid "Show 'Restart softcam' in extensions menu"
+msgstr "Mostrare \"Riavviare softcam\" nel menu estensioni"
+
+msgid "SoftCam config directory"
+msgstr "Directory configurazione SoftCam"
+
+msgid "SoftCam directory"
+msgstr "Directory SoftCam"
+
+msgid "SoftCam manager"
+msgstr "SoftCam manager"
+
+msgid "SoftCam path configuration"
+msgstr "Impostazioni percorso SoftCam"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Start, stop, restart SoftCams, change settings."
+msgstr "Avvio, arrsto, riavvio SoftCam, modifica impostazioni."
+
+#, python-format
+msgid "Starting %s"
+msgstr "Avvio di %s..."
+
+msgid "Stop"
+msgstr "Stop"
+
+#, python-format
+msgid "Stopping %s"
+msgstr "Arresto di %s..."
