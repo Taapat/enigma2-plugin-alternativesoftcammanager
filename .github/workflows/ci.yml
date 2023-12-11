@@ -85,7 +85,7 @@ jobs:
         run: |
           mkdir -p deploy/data/usr/lib/enigma2/python/Plugins
           cp -r build/lib/* deploy/data/usr/lib/enigma2/python/Plugins
-          sed -i 's/Version:/Version: ${{ env.env.PKGV }}/' deploy/control/control
+          sed -i 's/Version:/Version: ${{ env.PKGV }}/' deploy/control/control
           mkdir ipk
       - name: Compile python sources
         run: |
@@ -102,7 +102,7 @@ jobs:
         working-directory: './deploy'
         run: |
           echo 2.0 > debian-binary
-          ar rv ../ipk/enigma2-plugin-extensions-alternativesoftcammanager_${{ env.env.PKGV }}_all.ipk debian-binary data.tar.gz control.tar.gz
+          ar rv ../ipk/enigma2-plugin-extensions-alternativesoftcammanager_${{ env.PKGV }}_all.ipk debian-binary data.tar.gz control.tar.gz
       - name: Create release
         uses: Taapat/github-release@v2.1.0
         with:
@@ -111,7 +111,7 @@ jobs:
           name: ${{ env.COMMIT_SUBJECT }}
           gzip: false
           files: >
-            ipk/enigma2-plugin-extensions-alternativesoftcammanager_${{ env.env.PKGV }}_all.ipk
+            ipk/enigma2-plugin-extensions-alternativesoftcammanager_${{ env.PKGV }}_all.ipk
       - name: Upload ipk via ftp
         uses: sebastianpopp/ftp-action@releases/v2
         with:
